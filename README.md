@@ -190,7 +190,8 @@ PopuliCafe/
 
 ## 👨‍💻 Developer
 
-**Nama:** Gilang Rizky Ramadhan  
+**Nama:** Gilang Rizky Ramadhan
+
 **NIM:** 1247050049
 
 **Program Studi:** Teknik Informatika
