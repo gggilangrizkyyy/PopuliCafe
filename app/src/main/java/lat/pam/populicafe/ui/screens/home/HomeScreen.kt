@@ -30,7 +30,12 @@ fun HomeScreen( cartViewModel: CartViewModel,
         mutableStateOf("All")
     }
 
-    val categories = listOf("All", "Drinks", "Snacks", "Meals")
+    val categories = listOf(
+        "All",
+        "Drinks",
+        "Snacks",
+        "Meals"
+    )
 
     val filteredMenu = if (selectedCategory == "All") {
         menuItems
@@ -87,7 +92,13 @@ fun HomeScreen( cartViewModel: CartViewModel,
                     },
                     label = {
                         Text(
-                            if (category == "All") "Semua" else category
+                            when (category) {
+                                "All" -> "Semua"
+                                "Drinks" -> "Minuman"
+                                "Snacks" -> "Camilan"
+                                "Meals" -> "Makanan"
+                                else -> category
+                            }
                         )
                     }
                 )
@@ -199,17 +210,22 @@ fun MenuCard(
 
                 if (item.isMerakyat) {
                     Surface(
-                        shape = RoundedCornerShape(8.dp),
-                        color = PopuliSage
+                        shape = RoundedCornerShape(6.dp),
+                        color = PopuliCream,
+                        border = androidx.compose.foundation.BorderStroke(
+                            1.dp,
+                            PopuliTerracotta
+                        )
                     ) {
                         Text(
-                            text = "Merakyat",
+                            text = "MERAKYAT",
                             modifier = Modifier.padding(
                                 horizontal = 8.dp,
                                 vertical = 4.dp
                             ),
-                            color = PopuliEspresso,
-                            style = MaterialTheme.typography.labelSmall
+                            color = PopuliTerracotta,
+                            style = MaterialTheme.typography.labelSmall,
+                            fontWeight = FontWeight.Bold
                         )
                     }
                 }
@@ -232,7 +248,12 @@ fun MenuCard(
             ) {
                 Column {
                     Text(
-                        text = item.category,
+                        text = when (item.category) {
+                            "Drinks" -> "Minuman"
+                            "Snacks" -> "Camilan"
+                            "Meals" -> "Makanan"
+                            else -> item.category
+                        },
                         style = MaterialTheme.typography.labelSmall,
                         color = PopuliTextSecondary
                     )
@@ -247,12 +268,16 @@ fun MenuCard(
 
                 Button(
                     onClick = onAdd,
+                    shape = RoundedCornerShape(14.dp),
+                    modifier = Modifier.heightIn(min = 48.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = PopuliTerracotta
+                        containerColor = PopuliEspresso,
+                        contentColor = PopuliCream
                     )
                 ) {
                     Text(
-                        if (quantity == 0) "Tambah" else "Tambah ($quantity)"
+                        if (quantity == 0) "Tambah" else "Tambah ($quantity)",
+                        fontWeight = FontWeight.Bold
                     )
                 }
             }

@@ -28,9 +28,15 @@ import lat.pam.populicafe.ui.screens.order.OrderScreen
 import android.net.Uri
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-
 import lat.pam.populicafe.ui.screens.order.DeliveryScreen
 import lat.pam.populicafe.ui.screens.order.ConfirmationScreen
+import lat.pam.populicafe.viewmodel.ProfileViewModel
+import lat.pam.populicafe.ui.screens.profile.ProfileScreen
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.runtime.getValue
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.compose.foundation.layout.padding
 
 // ==========================================
 // 1. APP ROUTE
@@ -45,98 +51,176 @@ object AppRoute {
     const val ORDER = "order"
     const val DELIVERY = "delivery"
     const val CONFIRMATION = "confirmation/{customerName}"
+    const val PROFILE = "profile"
 }
 
 // ==========================================
 // 2. NAVIGATION CONTROLLER
 // ==========================================
 
+
 @Composable
 fun PopuliApp() {
 
     val navController = rememberNavController()
+
     val cartViewModel: CartViewModel = viewModel()
+    val profileViewModel: ProfileViewModel = viewModel()
 
-    NavHost(
-        navController = navController,
-        startDestination = AppRoute.SPLASH
-    ) {
+    val backStackEntry by
+    navController.currentBackStackEntryAsState()
 
-        composable(AppRoute.SPLASH) {
-            SplashScreen(navController)
-        }
+    val currentRoute = backStackEntry?.destination?.route
 
-        composable(AppRoute.SIGN_UP) {
-            SignUpScreen(navController)
-        }
+    val mainRoutes = listOf(
+        AppRoute.HOME,
+        AppRoute.ORDER,
+        AppRoute.PROFILE
+    )
 
-        composable(AppRoute.LOGIN) {
-            LoginScreen(navController)
-        }
+    val showBottomBar = currentRoute in mainRoutes
 
-        composable(AppRoute.REGISTER) {
-            RegisterScreen(navController)
-        }
+    Scaffold(
+        bottomBar = {
+            if (showBottomBar) {
+                NavigationBar(
+                    containerColor = PopuliCard
+                ) {
+                    NavigationBarItem(
+                        selected = currentRoute == AppRoute.HOME,
+                        onClick = {
+                            navController.navigate(AppRoute.HOME) {
+                                popUpTo(AppRoute.HOME) {
+                                    inclusive = false
+                                }
+                                launchSingleTop = true
+                            }
+                        },
+                        icon = { Text("⌂") },
+                        label = { Text("Home") }
+                    )
 
-        composable(AppRoute.HOME) {
-            HomeScreen(
-                cartViewModel = cartViewModel,
-                onOpenCart = {
-                    navController.navigate(AppRoute.ORDER)
-                }
-            )
-        }
+                    NavigationBarItem(
+                        selected = currentRoute == AppRoute.ORDER,
+                        onClick = {
+                            navController.navigate(AppRoute.ORDER) {
+                                launchSingleTop = true
+                            }
+                        },
+                        icon = { Text("▣") },
+                        label = { Text("Order") }
+                    )
 
-        composable(AppRoute.ORDER) {
-            OrderScreen(
-                cartViewModel = cartViewModel,
-                onCheckout = {
-                    navController.navigate(AppRoute.DELIVERY)
-                }
-            )
-        }
-
-        composable(AppRoute.DELIVERY) {
-            DeliveryScreen(
-                cartViewModel = cartViewModel,
-                onBack = {
-                    navController.popBackStack()
-                },
-                onPlaceOrder = { customerName ->
-                    navController.navigate(
-                        "confirmation/${Uri.encode(customerName)}"
+                    NavigationBarItem(
+                        selected = currentRoute == AppRoute.PROFILE,
+                        onClick = {
+                            navController.navigate(AppRoute.PROFILE) {
+                                launchSingleTop = true
+                            }
+                        },
+                        icon = { Text("●") },
+                        label = { Text("Profile") }
                     )
                 }
-            )
+            }
         }
+    ) { innerPadding ->
 
-        composable(
-            route = AppRoute.CONFIRMATION,
-            arguments = listOf(
-                navArgument("customerName") {
-                    type = NavType.StringType
-                }
-            )
-        ) { backStackEntry ->
+        NavHost(
+            navController = navController,
+            startDestination = AppRoute.SPLASH,
+            modifier = Modifier.padding(innerPadding)
+        ) {
 
-            val customerName =
-                backStackEntry.arguments?.getString("customerName")
-                    ?: "Rakyat Populi"
+            composable(AppRoute.SPLASH) {
+                SplashScreen(navController)
+            }
 
-            ConfirmationScreen(
-                customerName = customerName,
-                onFinish = {
-                    cartViewModel.clearCart()
+            composable(AppRoute.SIGN_UP) {
+                SignUpScreen(navController)
+            }
 
-                    navController.popBackStack(
-                        route = AppRoute.HOME,
-                        inclusive = false
-                    )
-                }
-            )
+            composable(AppRoute.LOGIN) {
+                LoginScreen(navController)
+            }
+
+            composable(AppRoute.REGISTER) {
+                RegisterScreen(navController)
+            }
+
+            composable(AppRoute.HOME) {
+                HomeScreen(
+                    cartViewModel = cartViewModel,
+                    onOpenCart = {
+                        navController.navigate(AppRoute.ORDER) {
+                            launchSingleTop = true
+                        }
+                    }
+                )
+            }
+
+            composable(AppRoute.ORDER) {
+                OrderScreen(
+                    cartViewModel = cartViewModel,
+                    onCheckout = {
+                        navController.navigate(AppRoute.DELIVERY)
+                    }
+                )
+            }
+
+            composable(AppRoute.PROFILE) {
+                ProfileScreen(
+                    profileViewModel = profileViewModel
+                )
+            }
+
+            composable(AppRoute.DELIVERY) {
+                DeliveryScreen(
+                    cartViewModel = cartViewModel,
+                    onBack = {
+                        navController.popBackStack()
+                    },
+                    onPlaceOrder = { customerName ->
+
+                        profileViewModel.recordOrder(customerName)
+
+                        navController.navigate(
+                            "confirmation/${Uri.encode(customerName)}"
+                        )
+                    }
+                )
+            }
+
+            composable(
+                route = AppRoute.CONFIRMATION,
+                arguments = listOf(
+                    navArgument("customerName") {
+                        type = NavType.StringType
+                    }
+                )
+            ) { backStackEntry ->
+
+                val customerName =
+                    backStackEntry.arguments
+                        ?.getString("customerName")
+                        ?: "Rakyat Populi"
+
+                ConfirmationScreen(
+                    customerName = customerName,
+                    onFinish = {
+                        cartViewModel.clearCart()
+
+                        navController.popBackStack(
+                            route = AppRoute.HOME,
+                            inclusive = false
+                        )
+                    }
+                )
+            }
         }
     }
 }
+
 
 // ==========================================
 // 3. SPLASH SCREEN

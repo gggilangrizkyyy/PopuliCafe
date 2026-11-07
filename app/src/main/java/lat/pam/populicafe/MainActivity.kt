@@ -1,4 +1,3 @@
-
 package lat.pam.populicafe
 
 import android.os.Bundle
