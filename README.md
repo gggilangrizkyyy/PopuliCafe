@@ -44,18 +44,35 @@ Palet warna:
 
 ## 📱 Screenshot Aplikasi
 
-Screenshot aplikasi dapat dilihat pada folder `Screenshots/` di repository ini.
-
 Halaman yang ditampilkan:
-1. Splash Screen
+1. Splash Screen 
+<img width="601" height="1280" alt="Splash" src="https://github.com/user-attachments/assets/2d73fc71-4bb9-4119-b83c-73bb8794f697" />
+
 2. Sign Up
+<img width="597" height="1280" alt="Signup" src="https://github.com/user-attachments/assets/5b07688c-cf43-4438-a6ec-0c1e90d61b63" />
+
 3. Login
-4. Register
-5. Home
-6. Order
-7. Alamat Pengiriman
-8. Konfirmasi Pesanan
-9. Profile
+<img width="598" height="1280" alt="Login" src="https://github.com/user-attachments/assets/86f7dba5-f464-443c-b431-c7d881c49def" />
+
+5. Register
+<img width="596" height="1280" alt="Register" src="https://github.com/user-attachments/assets/5291e3c3-e153-433e-8460-267f010bbcc2" />
+
+7. Home
+<img width="576" height="1280" alt="Home" src="https://github.com/user-attachments/assets/2c26f388-5a10-4249-b8e3-90941026595f" />
+<img width="600" height="1280" alt="Home2" src="https://github.com/user-attachments/assets/53ee3d24-bc37-4917-9a3b-60ac0d23b69c" />
+
+8. Order
+<img width="598" height="1280" alt="Order" src="https://github.com/user-attachments/assets/a8e13f8d-bc37-4ea8-a016-e77698c7937a" />
+
+9. Alamat Pengiriman
+<img width="598" height="1280" alt="Delivery" src="https://github.com/user-attachments/assets/ef79f30f-ff90-41c7-8b56-2a139a825cc4" />
+
+10. Konfirmasi Pesanan
+<img width="601" height="1280" alt="Confirmation" src="https://github.com/user-attachments/assets/18d4e5e4-b1fb-49bd-8df2-a9ebaa0cd14f" />
+
+11. Profile
+<img width="600" height="1280" alt="Profile" src="https://github.com/user-attachments/assets/2238e200-2414-486b-b7ec-ee2f9eefb3bb" />
+
 
 ## 📂 Struktur Project
 
