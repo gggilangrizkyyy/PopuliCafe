@@ -1,4 +1,4 @@
-# ☕ Populi Cafe *Vox populi, vox caffeine.* ☕
+# ☕ Populi Cafe - *Vox populi, vox caffeine.* ☕
 
 **Aplikasi Pemesanan Kopi dan Camilan Berbasis Android**
 
