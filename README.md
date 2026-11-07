@@ -1,4 +1,4 @@
-# ☕ Populi Cafe
+# ☕ Populi Cafe *Vox populi, vox caffeine.* ☕
 
 **Aplikasi Pemesanan Kopi dan Camilan Berbasis Android**
 
@@ -192,7 +192,9 @@ PopuliCafe/
 
 **Nama:** Gilang Rizky Ramadhan  
 **NIM:** 1247050049
+
 **Program Studi:** Teknik Informatika
+
 **Mata Kuliah:** Pengembangan Aplikasi Mobile
 
 ---
