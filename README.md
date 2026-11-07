@@ -1,8 +1,8 @@
-# ☕ Populi Coffee
+# ☕ Populi Cafe
 
 **Aplikasi Pemesanan Kopi dan Camilan Berbasis Android**
 
-Populi Coffee adalah aplikasi mobile pemesanan kopi, camilan, dan makanan yang dirancang untuk memberikan pengalaman pemesanan yang mudah, praktis, dan nyaman.
+Populi Cafe adalah aplikasi mobile pemesanan kopi, camilan, dan makanan yang dirancang untuk memberikan pengalaman pemesanan yang mudah, praktis, dan nyaman.
 
 Aplikasi ini dikembangkan sebagai proyek tugas Pemrograman Mobile menggunakan Kotlin dan Jetpack Compose dengan data dummy tanpa database.
 
@@ -33,7 +33,7 @@ Aplikasi ini dikembangkan sebagai proyek tugas Pemrograman Mobile menggunakan Ko
 
 ## 🎨 Konsep Desain
 
-Populi Coffee menggunakan konsep desain hangat dan sederhana dengan inspirasi warung kopi sebagai ruang berkumpul masyarakat.
+Populi Cafe menggunakan konsep desain hangat dan sederhana dengan inspirasi warung kopi sebagai ruang berkumpul masyarakat.
 
 Palet warna:
 - Cream: `#F5EDE0`
@@ -160,7 +160,7 @@ PopuliCafe/
 4. Tunggu proses Gradle Sync selesai.
 5. Hubungkan perangkat Android atau jalankan emulator.
 6. Klik tombol **Run ▶**.
-7. Aplikasi Populi Coffee siap digunakan.
+7. Aplikasi Populi Cafe siap digunakan.
 
 ## 📝 Catatan Pengembangan
 
@@ -180,4 +180,4 @@ PopuliCafe/
 
 ---
 
-*Populi Coffee — Vox populi, vox caffeine.* ☕
+*Populi Cafe — Vox populi, vox caffeine.* ☕
